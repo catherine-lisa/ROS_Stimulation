@@ -1,0 +1,15 @@
+<launch>
+ 
+  <arg name="model" default="$(find Gou2)/urdf/Gou2.urdf"/>
+  <arg name="gui" default="true" />
+  <arg name="rvizconfig" default="$(find Gou2)/rviz/urdf.rviz" />
+ 
+  <param name="robot_description" command="$(find xacro)/xacro --inorder $(arg model)" />
+  <param name="use_gui" value="$(arg gui)"/>
+ 
+  <node name="gou2" pkg="Gou2" type="gou2" output="screen"/>
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
+ 
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true" />
+ 
+</launch>
